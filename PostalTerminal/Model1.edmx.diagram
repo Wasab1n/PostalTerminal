@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3e60216a38844d6b9e2ff8b05f7a74ae" Name="Diagram1" ZoomLevel="90" >
+        <EntityTypeShape EntityType="Model1.RegisteredUser" Width="1.5" PointX="6.375" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Client" Width="1.5" PointX="6.125" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Admin" Width="1.5" PointX="4" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Handler" Width="1.5" PointX="8.875" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Car" Width="1.5" PointX="9.875" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.PostalTerminal" Width="1.5" PointX="11.125" PointY="3.625" />
+        <InheritanceConnector EntityType="Model1.Client" />
+        <InheritanceConnector EntityType="Model1.Admin" />
+        <InheritanceConnector EntityType="Model1.Handler" />
+        <EntityTypeShape EntityType="Model1.PostOffice" Width="1.5" PointX="12.875" PointY="0.5" />
+        <EntityTypeShape EntityType="Model1.DetailedState" Width="1.5" PointX="14.625" PointY="3.375" />
+        <EntityTypeShape EntityType="Model1.faultCodes" Width="1.5" PointX="16.875" PointY="3.875" />
+        <AssociationConnector Association="Model1.CarHandler" />
+        <AssociationConnector Association="Model1.PostOfficeHandler" />
+        <AssociationConnector Association="Model1.PostalTerminalHandler" />
+        <AssociationConnector Association="Model1.PostalTerminalDetailedState" />
+        <AssociationConnector Association="Model1.DetailedStatefaultCodes" />
+        <EntityTypeShape EntityType="Model1.Cities" Width="1.5" PointX="13.125" PointY="6" />
+        <AssociationConnector Association="Model1.CitiesPostOffice" />
+        <AssociationConnector Association="Model1.CitiesPostalTerminal" />
+        <EntityTypeShape EntityType="Model1.Delivery" Width="1.5" PointX="6.625" PointY="5.625" />
+        <EntityTypeShape EntityType="Model1.Email" Width="1.5" PointX="4.5" PointY="8.125" />
+        <EntityTypeShape EntityType="Model1.DeliveryState" Width="1.5" PointX="8.875" PointY="8" />
+        <EntityTypeShape EntityType="Model1.DeliveryRegistration" Width="1.5" PointX="11.375" PointY="8.125" />
+        <AssociationConnector Association="Model1.DeliveryRegistrationDelivery" />
+        <AssociationConnector Association="Model1.DeliveryStateDelivery" />
+        <AssociationConnector Association="Model1.EmailDelivery" />
+        <EntityTypeShape EntityType="Model1.Payment" Width="1.5" PointX="3.625" PointY="5" />
+        <EntityTypeShape EntityType="Model1.payentState" Width="1.5" PointX="1.125" PointY="7.125" />
+        <EntityTypeShape EntityType="Model1.paymentType" Width="1.5" PointX="1.375" PointY="4.375" />
+        <AssociationConnector Association="Model1.PaymentDelivery" />
+        <AssociationConnector Association="Model1.paymentTypePayment" />
+        <AssociationConnector Association="Model1.payentStatePayment" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
