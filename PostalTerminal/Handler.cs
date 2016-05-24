@@ -14,6 +14,7 @@ namespace PostalTerminal
     
     public partial class Handler : RegisteredUser
     {
+        public int postalTerminalId;
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Handler()
         {
@@ -29,5 +30,7 @@ namespace PostalTerminal
         public virtual PostOffice PostOffice { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PostalTerminal> PostalTerminals { get; set; }
+
+        public int handlerId { get; set; }
     }
 }

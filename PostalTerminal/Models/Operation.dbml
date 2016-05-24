@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="postalterminaldb" Class="OperationDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=postalterminal.database.windows.net;Initial Catalog=postalterminaldb;Persist Security Info=True;User ID=taurai;MultipleActiveResultSets=True;Application Name=EntityFramework" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="postalterminaldbConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.PostalTerminalHandler" Member="PostalTerminalHandlers">
+    <Type Name="PostalTerminalHandler">
+      <Column Name="PostalTerminals_Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Handlers_User_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

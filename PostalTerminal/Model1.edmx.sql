@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/24/2016 16:06:39
--- Generated from EDMX file: C:\Users\Mantas\documents\visual studio 2013\Projects\PostalTerminal\PostalTerminal\Model1.edmx
+-- Date Created: 05/24/2016 22:21:32
+-- Generated from EDMX file: C:\Users\TR\Source\Repos\PostalTerminal\PostalTerminal\Model1.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [PostalTerminalDB];
+USE [postalterminaldb];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -439,7 +439,6 @@ ADD CONSTRAINT [FK_CarHandler]
     REFERENCES [dbo].[Cars]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_CarHandler'
 CREATE INDEX [IX_FK_CarHandler]
@@ -454,7 +453,6 @@ ADD CONSTRAINT [FK_PostOfficeHandler]
     REFERENCES [dbo].[PostOffices]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PostOfficeHandler'
 CREATE INDEX [IX_FK_PostOfficeHandler]
@@ -478,7 +476,6 @@ ADD CONSTRAINT [FK_PostalTerminalHandler_Handler]
     REFERENCES [dbo].[RegisteredUsers_Handler]
         ([User_Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PostalTerminalHandler_Handler'
 CREATE INDEX [IX_FK_PostalTerminalHandler_Handler]
@@ -493,7 +490,6 @@ ADD CONSTRAINT [FK_PostalTerminalDetailedState]
     REFERENCES [dbo].[DetailedStates]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PostalTerminalDetailedState'
 CREATE INDEX [IX_FK_PostalTerminalDetailedState]
@@ -508,7 +504,6 @@ ADD CONSTRAINT [FK_DetailedStatefaultCodes]
     REFERENCES [dbo].[faultCodes]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_DetailedStatefaultCodes'
 CREATE INDEX [IX_FK_DetailedStatefaultCodes]
@@ -523,7 +518,6 @@ ADD CONSTRAINT [FK_CitiesPostOffice]
     REFERENCES [dbo].[Cities]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_CitiesPostOffice'
 CREATE INDEX [IX_FK_CitiesPostOffice]
@@ -538,7 +532,6 @@ ADD CONSTRAINT [FK_CitiesPostalTerminal]
     REFERENCES [dbo].[Cities]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_CitiesPostalTerminal'
 CREATE INDEX [IX_FK_CitiesPostalTerminal]
@@ -553,7 +546,6 @@ ADD CONSTRAINT [FK_DeliveryRegistrationDelivery]
     REFERENCES [dbo].[Deliveries]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_DeliveryRegistrationDelivery'
 CREATE INDEX [IX_FK_DeliveryRegistrationDelivery]
@@ -568,7 +560,6 @@ ADD CONSTRAINT [FK_DeliveryStateDelivery]
     REFERENCES [dbo].[Deliveries]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_DeliveryStateDelivery'
 CREATE INDEX [IX_FK_DeliveryStateDelivery]
@@ -583,7 +574,6 @@ ADD CONSTRAINT [FK_EmailDelivery]
     REFERENCES [dbo].[Deliveries]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_EmailDelivery'
 CREATE INDEX [IX_FK_EmailDelivery]
@@ -598,7 +588,6 @@ ADD CONSTRAINT [FK_PaymentDelivery]
     REFERENCES [dbo].[Deliveries]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PaymentDelivery'
 CREATE INDEX [IX_FK_PaymentDelivery]
@@ -613,7 +602,6 @@ ADD CONSTRAINT [FK_paymentTypePayment]
     REFERENCES [dbo].[paymentTypes]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_paymentTypePayment'
 CREATE INDEX [IX_FK_paymentTypePayment]
@@ -628,7 +616,6 @@ ADD CONSTRAINT [FK_payentStatePayment]
     REFERENCES [dbo].[Payments]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_payentStatePayment'
 CREATE INDEX [IX_FK_payentStatePayment]

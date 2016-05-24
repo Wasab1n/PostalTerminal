@@ -1,0 +1,33 @@
+﻿
+@model global::PostalTerminal.Models.HandlerModel
+@{
+    ViewBag.Title = "Create";
+}
+<h2>Create</h2>
+@using (Html.BeginForm())
+{ 
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>PublisherModel</legend>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PostalTerminals_Id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PostalTerminals_Id)
+            @Html.ValidationMessageFor(model => model.PostalTerminals_Id)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Handlers_User_id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Handlers_User_id)
+            @Html.ValidationMessageFor(model => model.Handlers_User_id)
+        </div>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>  
