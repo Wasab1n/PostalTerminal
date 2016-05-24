@@ -1,0 +1,83 @@
+﻿@model PostalTerminal.Models.Delivery
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Delivery</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.clientID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.clientID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.paymentID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.paymentID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.registrationID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.registrationID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.receiverName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.receiverName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.receiverSurname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.receiverSurname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.registrationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.registrationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.weight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.weight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.emailSent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.emailSent)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

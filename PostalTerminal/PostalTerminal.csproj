@@ -275,6 +275,7 @@
     <Content Include="Models\PostalTerminalDBModel.edmx.diagram">
       <DependentUpon>PostalTerminalDBModel.edmx</DependentUpon>
     </Content>
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -340,6 +341,11 @@
     <Content Include="Views\Cities\Details.cshtml" />
     <Content Include="Views\Cities\Edit.cshtml" />
     <Content Include="Views\Cities\Index.cshtml" />
+    <Content Include="Views\Deliveries1\Create.cshtml" />
+    <Content Include="Views\Deliveries1\Delete.cshtml" />
+    <Content Include="Views\Deliveries1\Details.cshtml" />
+    <Content Include="Views\Deliveries1\Edit.cshtml" />
+    <Content Include="Views\Deliveries1\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
