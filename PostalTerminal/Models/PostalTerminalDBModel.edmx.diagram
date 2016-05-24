@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f6539fa92b044f4ebe3fed79babfb418" Name="Diagram1">
+        <EntityTypeShape EntityType="postalterminaldbModel.Car" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="postalterminaldbModel.City" Width="1.5" PointX="1.5" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="postalterminaldbModel.Delivery" Width="1.5" PointX="8.75" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="postalterminaldbModel.DeliveryRegistration" Width="1.5" PointX="11" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="postalterminaldbModel.DeliveryState" Width="1.5" PointX="11" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="postalterminaldbModel.DetailedState" Width="1.5" PointX="6" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="postalterminaldbModel.Email" Width="1.5" PointX="11" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="postalterminaldbModel.faultCode" Width="1.5" PointX="3.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="postalterminaldbModel.payentState" Width="1.5" PointX="16.25" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="postalterminaldbModel.Payment" Width="1.5" PointX="14" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="postalterminaldbModel.paymentType" Width="1.5" PointX="11.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="postalterminaldbModel.PostalTerminal" Width="1.5" PointX="8.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="postalterminaldbModel.PostOffice" Width="1.5" PointX="3.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="postalterminaldbModel.RegisteredUser" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="postalterminaldbModel.RegisteredUsers_Admin" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="postalterminaldbModel.RegisteredUsers_Client" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="postalterminaldbModel.RegisteredUsers_Handler" Width="1.5" PointX="6" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="postalterminaldbModel.Table" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="postalterminaldbModel.database_firewall_rules" Width="1.5" PointX="5.75" PointY="1.625" IsExpanded="true" />
+        <AssociationConnector Association="postalterminaldbModel.FK_CarHandler" ManuallyRouted="false" />
+        <AssociationConnector Association="postalterminaldbModel.FK_CitiesPostalTerminal" ManuallyRouted="false" />
+        <AssociationConnector Association="postalterminaldbModel.FK_CitiesPostOffice" ManuallyRouted="false" />
+        <AssociationConnector Association="postalterminaldbModel.FK_DeliveryRegistrationDelivery" ManuallyRouted="false" />
+        <AssociationConnector Association="postalterminaldbModel.FK_DeliveryStateDelivery" ManuallyRouted="false" />
+        <AssociationConnector Association="postalterminaldbModel.FK_EmailDelivery" ManuallyRouted="false" />
+        <AssociationConnector Association="postalterminaldbModel.FK_PaymentDelivery" ManuallyRouted="false" />
+        <AssociationConnector Association="postalterminaldbModel.FK_DetailedStatefaultCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="postalterminaldbModel.FK_PostalTerminalDetailedState" ManuallyRouted="false" />
+        <AssociationConnector Association="postalterminaldbModel.FK_payentStatePayment" ManuallyRouted="false" />
+        <AssociationConnector Association="postalterminaldbModel.FK_paymentTypePayment" ManuallyRouted="false" />
+        <AssociationConnector Association="postalterminaldbModel.FK_PostOfficeHandler" ManuallyRouted="false" />
+        <AssociationConnector Association="postalterminaldbModel.FK_Admin_inherits_RegisteredUser" ManuallyRouted="false" />
+        <AssociationConnector Association="postalterminaldbModel.FK_Client_inherits_RegisteredUser" ManuallyRouted="false" />
+        <AssociationConnector Association="postalterminaldbModel.FK_Handler_inherits_RegisteredUser" ManuallyRouted="false" />
+        <AssociationConnector Association="postalterminaldbModel.PostalTerminalHandler" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

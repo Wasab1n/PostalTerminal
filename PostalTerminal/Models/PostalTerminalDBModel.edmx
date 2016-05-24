@@ -1,0 +1,1293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="postalterminaldbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cars">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="numberPlate" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="insurance" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TA" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="isWorking" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="garage" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ISOCode" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Deliveries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clientID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="paymentID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="registrationID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="receiverName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="receiverSurname" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="registrationDate" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="weight" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="emailSent" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DeliveryRegistrations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="registrationDate" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="validUntil" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="validFrom" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Delivery_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DeliveryStates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="stateID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="updateDate" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Delivery_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DetailedStates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="isWorking" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="faultCode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="isFull" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="needsService" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="faultCode1_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Emails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clientID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="deliveryID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="sendTime" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Delivery_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="faultCodes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="payentStates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Payment_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="paymentStateID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="paymentTypeID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="date" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="price" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="paymentTypeId1" Type="int" Nullable="false" />
+          <Property Name="Delivery_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="paymentTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PostalTerminalHandler">
+          <Key>
+            <PropertyRef Name="PostalTerminals_Id" />
+            <PropertyRef Name="Handlers_User_id" />
+          </Key>
+          <Property Name="PostalTerminals_Id" Type="int" Nullable="false" />
+          <Property Name="Handlers_User_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PostalTerminals">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cityID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="placesCount" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="street" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ZIPCode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="startDate" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="workHours" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CitiesId" Type="int" Nullable="false" />
+          <Property Name="DetailedState_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PostOffices">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cityID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="street" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="employees" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="shipments" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ZIPCode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CitiesId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RegisteredUsers">
+          <Key>
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Name="User_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="phone" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="registerDate" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="gender" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="birthday" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RegisteredUsers_Admin">
+          <Key>
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="workTable" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="User_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RegisteredUsers_Client">
+          <Key>
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="sendOffers" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="isActive" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="User_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RegisteredUsers_Handler">
+          <Key>
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="city" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="car" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PostOfficeId" Type="int" Nullable="false" />
+          <Property Name="User_id" Type="int" Nullable="false" />
+          <Property Name="Car_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="10" />
+          <Property Name="address" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'postalterminaldb.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+          <Property Name="modify_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Admin_inherits_RegisteredUser">
+          <End Role="RegisteredUsers" Type="Self.RegisteredUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RegisteredUsers_Admin" Type="Self.RegisteredUsers_Admin" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="RegisteredUsers">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="RegisteredUsers_Admin">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CarHandler">
+          <End Role="Cars" Type="Self.Cars" Multiplicity="1" />
+          <End Role="RegisteredUsers_Handler" Type="Self.RegisteredUsers_Handler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegisteredUsers_Handler">
+              <PropertyRef Name="Car_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CitiesPostalTerminal">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
+          <End Role="PostalTerminals" Type="Self.PostalTerminals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostalTerminals">
+              <PropertyRef Name="CitiesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CitiesPostOffice">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
+          <End Role="PostOffices" Type="Self.PostOffices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostOffices">
+              <PropertyRef Name="CitiesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_inherits_RegisteredUser">
+          <End Role="RegisteredUsers" Type="Self.RegisteredUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RegisteredUsers_Client" Type="Self.RegisteredUsers_Client" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="RegisteredUsers">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="RegisteredUsers_Client">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeliveryRegistrationDelivery">
+          <End Role="Deliveries" Type="Self.Deliveries" Multiplicity="1" />
+          <End Role="DeliveryRegistrations" Type="Self.DeliveryRegistrations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deliveries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DeliveryRegistrations">
+              <PropertyRef Name="Delivery_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeliveryStateDelivery">
+          <End Role="Deliveries" Type="Self.Deliveries" Multiplicity="1" />
+          <End Role="DeliveryStates" Type="Self.DeliveryStates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deliveries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DeliveryStates">
+              <PropertyRef Name="Delivery_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailedStatefaultCodes">
+          <End Role="faultCodes" Type="Self.faultCodes" Multiplicity="1" />
+          <End Role="DetailedStates" Type="Self.DetailedStates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="faultCodes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DetailedStates">
+              <PropertyRef Name="faultCode1_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmailDelivery">
+          <End Role="Deliveries" Type="Self.Deliveries" Multiplicity="1" />
+          <End Role="Emails" Type="Self.Emails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deliveries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Emails">
+              <PropertyRef Name="Delivery_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Handler_inherits_RegisteredUser">
+          <End Role="RegisteredUsers" Type="Self.RegisteredUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RegisteredUsers_Handler" Type="Self.RegisteredUsers_Handler" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="RegisteredUsers">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="RegisteredUsers_Handler">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_payentStatePayment">
+          <End Role="Payments" Type="Self.Payments" Multiplicity="1" />
+          <End Role="payentStates" Type="Self.payentStates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="payentStates">
+              <PropertyRef Name="Payment_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentDelivery">
+          <End Role="Deliveries" Type="Self.Deliveries" Multiplicity="1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deliveries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="Delivery_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_paymentTypePayment">
+          <End Role="paymentTypes" Type="Self.paymentTypes" Multiplicity="1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paymentTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="paymentTypeId1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostalTerminalDetailedState">
+          <End Role="DetailedStates" Type="Self.DetailedStates" Multiplicity="1" />
+          <End Role="PostalTerminals" Type="Self.PostalTerminals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetailedStates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostalTerminals">
+              <PropertyRef Name="DetailedState_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostalTerminalHandler_Handler">
+          <End Role="RegisteredUsers_Handler" Type="Self.RegisteredUsers_Handler" Multiplicity="1" />
+          <End Role="PostalTerminalHandler" Type="Self.PostalTerminalHandler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisteredUsers_Handler">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="PostalTerminalHandler">
+              <PropertyRef Name="Handlers_User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostalTerminalHandler_PostalTerminal">
+          <End Role="PostalTerminals" Type="Self.PostalTerminals" Multiplicity="1" />
+          <End Role="PostalTerminalHandler" Type="Self.PostalTerminalHandler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostalTerminals">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostalTerminalHandler">
+              <PropertyRef Name="PostalTerminals_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostOfficeHandler">
+          <End Role="PostOffices" Type="Self.PostOffices" Multiplicity="1" />
+          <End Role="RegisteredUsers_Handler" Type="Self.RegisteredUsers_Handler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostOffices">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegisteredUsers_Handler">
+              <PropertyRef Name="PostOfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="postalterminaldbModelStoreContainer">
+          <EntitySet Name="Cars" EntityType="Self.Cars" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Deliveries" EntityType="Self.Deliveries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeliveryRegistrations" EntityType="Self.DeliveryRegistrations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeliveryStates" EntityType="Self.DeliveryStates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetailedStates" EntityType="Self.DetailedStates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Emails" EntityType="Self.Emails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="faultCodes" EntityType="Self.faultCodes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="payentStates" EntityType="Self.payentStates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="paymentTypes" EntityType="Self.paymentTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PostalTerminalHandler" EntityType="Self.PostalTerminalHandler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PostalTerminals" EntityType="Self.PostalTerminals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PostOffices" EntityType="Self.PostOffices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegisteredUsers" EntityType="Self.RegisteredUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegisteredUsers_Admin" EntityType="Self.RegisteredUsers_Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegisteredUsers_Client" EntityType="Self.RegisteredUsers_Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegisteredUsers_Handler" EntityType="Self.RegisteredUsers_Handler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
+            <DefiningQuery>SELECT 
+    [database_firewall_rules].[id] AS [id], 
+    [database_firewall_rules].[name] AS [name], 
+    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
+    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
+    [database_firewall_rules].[create_date] AS [create_date], 
+    [database_firewall_rules].[modify_date] AS [modify_date]
+    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Admin_inherits_RegisteredUser" Association="Self.FK_Admin_inherits_RegisteredUser">
+            <End Role="RegisteredUsers" EntitySet="RegisteredUsers" />
+            <End Role="RegisteredUsers_Admin" EntitySet="RegisteredUsers_Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CarHandler" Association="Self.FK_CarHandler">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="RegisteredUsers_Handler" EntitySet="RegisteredUsers_Handler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CitiesPostalTerminal" Association="Self.FK_CitiesPostalTerminal">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="PostalTerminals" EntitySet="PostalTerminals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CitiesPostOffice" Association="Self.FK_CitiesPostOffice">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="PostOffices" EntitySet="PostOffices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_inherits_RegisteredUser" Association="Self.FK_Client_inherits_RegisteredUser">
+            <End Role="RegisteredUsers" EntitySet="RegisteredUsers" />
+            <End Role="RegisteredUsers_Client" EntitySet="RegisteredUsers_Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeliveryRegistrationDelivery" Association="Self.FK_DeliveryRegistrationDelivery">
+            <End Role="Deliveries" EntitySet="Deliveries" />
+            <End Role="DeliveryRegistrations" EntitySet="DeliveryRegistrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeliveryStateDelivery" Association="Self.FK_DeliveryStateDelivery">
+            <End Role="Deliveries" EntitySet="Deliveries" />
+            <End Role="DeliveryStates" EntitySet="DeliveryStates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailedStatefaultCodes" Association="Self.FK_DetailedStatefaultCodes">
+            <End Role="faultCodes" EntitySet="faultCodes" />
+            <End Role="DetailedStates" EntitySet="DetailedStates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmailDelivery" Association="Self.FK_EmailDelivery">
+            <End Role="Deliveries" EntitySet="Deliveries" />
+            <End Role="Emails" EntitySet="Emails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Handler_inherits_RegisteredUser" Association="Self.FK_Handler_inherits_RegisteredUser">
+            <End Role="RegisteredUsers" EntitySet="RegisteredUsers" />
+            <End Role="RegisteredUsers_Handler" EntitySet="RegisteredUsers_Handler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_payentStatePayment" Association="Self.FK_payentStatePayment">
+            <End Role="Payments" EntitySet="Payments" />
+            <End Role="payentStates" EntitySet="payentStates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentDelivery" Association="Self.FK_PaymentDelivery">
+            <End Role="Deliveries" EntitySet="Deliveries" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_paymentTypePayment" Association="Self.FK_paymentTypePayment">
+            <End Role="paymentTypes" EntitySet="paymentTypes" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostalTerminalDetailedState" Association="Self.FK_PostalTerminalDetailedState">
+            <End Role="DetailedStates" EntitySet="DetailedStates" />
+            <End Role="PostalTerminals" EntitySet="PostalTerminals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostalTerminalHandler_Handler" Association="Self.FK_PostalTerminalHandler_Handler">
+            <End Role="RegisteredUsers_Handler" EntitySet="RegisteredUsers_Handler" />
+            <End Role="PostalTerminalHandler" EntitySet="PostalTerminalHandler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostalTerminalHandler_PostalTerminal" Association="Self.FK_PostalTerminalHandler_PostalTerminal">
+            <End Role="PostalTerminals" EntitySet="PostalTerminals" />
+            <End Role="PostalTerminalHandler" EntitySet="PostalTerminalHandler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostOfficeHandler" Association="Self.FK_PostOfficeHandler">
+            <End Role="PostOffices" EntitySet="PostOffices" />
+            <End Role="RegisteredUsers_Handler" EntitySet="RegisteredUsers_Handler" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="postalterminaldbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Car">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="numberPlate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="insurance" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TA" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isWorking" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="garage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="RegisteredUsers_Handler" Relationship="Self.FK_CarHandler" FromRole="Cars" ToRole="RegisteredUsers_Handler" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ISOCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PostalTerminals" Relationship="Self.FK_CitiesPostalTerminal" FromRole="Cities" ToRole="PostalTerminals" />
+          <NavigationProperty Name="PostOffices" Relationship="Self.FK_CitiesPostOffice" FromRole="Cities" ToRole="PostOffices" />
+        </EntityType>
+        <EntityType Name="Delivery">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clientID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="paymentID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="registrationID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="receiverName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="receiverSurname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="registrationDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="weight" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="emailSent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DeliveryRegistrations" Relationship="Self.FK_DeliveryRegistrationDelivery" FromRole="Deliveries" ToRole="DeliveryRegistrations" />
+          <NavigationProperty Name="DeliveryStates" Relationship="Self.FK_DeliveryStateDelivery" FromRole="Deliveries" ToRole="DeliveryStates" />
+          <NavigationProperty Name="Emails" Relationship="Self.FK_EmailDelivery" FromRole="Deliveries" ToRole="Emails" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK_PaymentDelivery" FromRole="Deliveries" ToRole="Payments" />
+        </EntityType>
+        <EntityType Name="DeliveryRegistration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="registrationDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="validUntil" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="validFrom" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Delivery_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Delivery" Relationship="Self.FK_DeliveryRegistrationDelivery" FromRole="DeliveryRegistrations" ToRole="Deliveries" />
+        </EntityType>
+        <EntityType Name="DeliveryState">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="stateID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="updateDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Delivery_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Delivery" Relationship="Self.FK_DeliveryStateDelivery" FromRole="DeliveryStates" ToRole="Deliveries" />
+        </EntityType>
+        <EntityType Name="DetailedState">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="isWorking" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="faultCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isFull" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="needsService" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="faultCode1_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="faultCode1" Relationship="Self.FK_DetailedStatefaultCodes" FromRole="DetailedStates" ToRole="faultCodes" />
+          <NavigationProperty Name="PostalTerminals" Relationship="Self.FK_PostalTerminalDetailedState" FromRole="DetailedStates" ToRole="PostalTerminals" />
+        </EntityType>
+        <EntityType Name="Email">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clientID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="deliveryID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sendTime" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Delivery_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Delivery" Relationship="Self.FK_EmailDelivery" FromRole="Emails" ToRole="Deliveries" />
+        </EntityType>
+        <EntityType Name="faultCode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="DetailedStates" Relationship="Self.FK_DetailedStatefaultCodes" FromRole="faultCodes" ToRole="DetailedStates" />
+        </EntityType>
+        <EntityType Name="payentState">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Payment_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Payment" Relationship="Self.FK_payentStatePayment" FromRole="payentStates" ToRole="Payments" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="paymentStateID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="paymentTypeID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="date" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="price" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="paymentTypeId1" Type="Int32" Nullable="false" />
+          <Property Name="Delivery_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Delivery" Relationship="Self.FK_PaymentDelivery" FromRole="Payments" ToRole="Deliveries" />
+          <NavigationProperty Name="payentStates" Relationship="Self.FK_payentStatePayment" FromRole="Payments" ToRole="payentStates" />
+          <NavigationProperty Name="paymentType" Relationship="Self.FK_paymentTypePayment" FromRole="Payments" ToRole="paymentTypes" />
+        </EntityType>
+        <EntityType Name="paymentType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK_paymentTypePayment" FromRole="paymentTypes" ToRole="Payments" />
+        </EntityType>
+        <EntityType Name="PostalTerminal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cityID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="placesCount" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="street" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ZIPCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="startDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="workHours" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CitiesId" Type="Int32" Nullable="false" />
+          <Property Name="DetailedState_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="City" Relationship="Self.FK_CitiesPostalTerminal" FromRole="PostalTerminals" ToRole="Cities" />
+          <NavigationProperty Name="DetailedState" Relationship="Self.FK_PostalTerminalDetailedState" FromRole="PostalTerminals" ToRole="DetailedStates" />
+          <NavigationProperty Name="RegisteredUsers_Handler" Relationship="Self.PostalTerminalHandler" FromRole="PostalTerminals" ToRole="RegisteredUsers_Handler" />
+        </EntityType>
+        <EntityType Name="PostOffice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cityID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="street" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="employees" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="shipments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ZIPCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CitiesId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="City" Relationship="Self.FK_CitiesPostOffice" FromRole="PostOffices" ToRole="Cities" />
+          <NavigationProperty Name="RegisteredUsers_Handler" Relationship="Self.FK_PostOfficeHandler" FromRole="PostOffices" ToRole="RegisteredUsers_Handler" />
+        </EntityType>
+        <EntityType Name="RegisteredUser">
+          <Key>
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Name="User_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="registerDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="birthday" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="RegisteredUsers_Admin" Relationship="Self.FK_Admin_inherits_RegisteredUser" FromRole="RegisteredUsers" ToRole="RegisteredUsers_Admin" />
+          <NavigationProperty Name="RegisteredUsers_Client" Relationship="Self.FK_Client_inherits_RegisteredUser" FromRole="RegisteredUsers" ToRole="RegisteredUsers_Client" />
+          <NavigationProperty Name="RegisteredUsers_Handler" Relationship="Self.FK_Handler_inherits_RegisteredUser" FromRole="RegisteredUsers" ToRole="RegisteredUsers_Handler" />
+        </EntityType>
+        <EntityType Name="RegisteredUsers_Admin">
+          <Key>
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="workTable" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="User_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RegisteredUser" Relationship="Self.FK_Admin_inherits_RegisteredUser" FromRole="RegisteredUsers_Admin" ToRole="RegisteredUsers" />
+        </EntityType>
+        <EntityType Name="RegisteredUsers_Client">
+          <Key>
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sendOffers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isActive" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="User_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RegisteredUser" Relationship="Self.FK_Client_inherits_RegisteredUser" FromRole="RegisteredUsers_Client" ToRole="RegisteredUsers" />
+        </EntityType>
+        <EntityType Name="RegisteredUsers_Handler">
+          <Key>
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="city" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="car" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PostOfficeId" Type="Int32" Nullable="false" />
+          <Property Name="User_id" Type="Int32" Nullable="false" />
+          <Property Name="Car_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Car1" Relationship="Self.FK_CarHandler" FromRole="RegisteredUsers_Handler" ToRole="Cars" />
+          <NavigationProperty Name="PostOffice" Relationship="Self.FK_PostOfficeHandler" FromRole="RegisteredUsers_Handler" ToRole="PostOffices" />
+          <NavigationProperty Name="RegisteredUser" Relationship="Self.FK_Handler_inherits_RegisteredUser" FromRole="RegisteredUsers_Handler" ToRole="RegisteredUsers" />
+          <NavigationProperty Name="PostalTerminals" Relationship="Self.PostalTerminalHandler" FromRole="RegisteredUsers_Handler" ToRole="PostalTerminals" />
+        </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="start_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="end_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK_CarHandler">
+          <End Role="Cars" Type="Self.Car" Multiplicity="1" />
+          <End Role="RegisteredUsers_Handler" Type="Self.RegisteredUsers_Handler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegisteredUsers_Handler">
+              <PropertyRef Name="Car_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CitiesPostalTerminal">
+          <End Role="Cities" Type="Self.City" Multiplicity="1" />
+          <End Role="PostalTerminals" Type="Self.PostalTerminal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostalTerminals">
+              <PropertyRef Name="CitiesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CitiesPostOffice">
+          <End Role="Cities" Type="Self.City" Multiplicity="1" />
+          <End Role="PostOffices" Type="Self.PostOffice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostOffices">
+              <PropertyRef Name="CitiesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeliveryRegistrationDelivery">
+          <End Role="Deliveries" Type="Self.Delivery" Multiplicity="1" />
+          <End Role="DeliveryRegistrations" Type="Self.DeliveryRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deliveries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DeliveryRegistrations">
+              <PropertyRef Name="Delivery_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeliveryStateDelivery">
+          <End Role="Deliveries" Type="Self.Delivery" Multiplicity="1" />
+          <End Role="DeliveryStates" Type="Self.DeliveryState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deliveries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DeliveryStates">
+              <PropertyRef Name="Delivery_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmailDelivery">
+          <End Role="Deliveries" Type="Self.Delivery" Multiplicity="1" />
+          <End Role="Emails" Type="Self.Email" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deliveries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Emails">
+              <PropertyRef Name="Delivery_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentDelivery">
+          <End Role="Deliveries" Type="Self.Delivery" Multiplicity="1" />
+          <End Role="Payments" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deliveries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="Delivery_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailedStatefaultCodes">
+          <End Role="faultCodes" Type="Self.faultCode" Multiplicity="1" />
+          <End Role="DetailedStates" Type="Self.DetailedState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="faultCodes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DetailedStates">
+              <PropertyRef Name="faultCode1_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostalTerminalDetailedState">
+          <End Role="DetailedStates" Type="Self.DetailedState" Multiplicity="1" />
+          <End Role="PostalTerminals" Type="Self.PostalTerminal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetailedStates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostalTerminals">
+              <PropertyRef Name="DetailedState_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_payentStatePayment">
+          <End Role="Payments" Type="Self.Payment" Multiplicity="1" />
+          <End Role="payentStates" Type="Self.payentState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="payentStates">
+              <PropertyRef Name="Payment_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_paymentTypePayment">
+          <End Role="paymentTypes" Type="Self.paymentType" Multiplicity="1" />
+          <End Role="Payments" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paymentTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="paymentTypeId1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostOfficeHandler">
+          <End Role="PostOffices" Type="Self.PostOffice" Multiplicity="1" />
+          <End Role="RegisteredUsers_Handler" Type="Self.RegisteredUsers_Handler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostOffices">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegisteredUsers_Handler">
+              <PropertyRef Name="PostOfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Admin_inherits_RegisteredUser">
+          <End Role="RegisteredUsers" Type="Self.RegisteredUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RegisteredUsers_Admin" Type="Self.RegisteredUsers_Admin" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="RegisteredUsers">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="RegisteredUsers_Admin">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_inherits_RegisteredUser">
+          <End Role="RegisteredUsers" Type="Self.RegisteredUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RegisteredUsers_Client" Type="Self.RegisteredUsers_Client" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="RegisteredUsers">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="RegisteredUsers_Client">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Handler_inherits_RegisteredUser">
+          <End Role="RegisteredUsers" Type="Self.RegisteredUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RegisteredUsers_Handler" Type="Self.RegisteredUsers_Handler" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="RegisteredUsers">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="RegisteredUsers_Handler">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PostalTerminalHandler">
+          <End Role="RegisteredUsers_Handler" Type="Self.RegisteredUsers_Handler" Multiplicity="*" />
+          <End Role="PostalTerminals" Type="Self.PostalTerminal" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="postalterminaldbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cars" EntityType="Self.Car" />
+          <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="Deliveries" EntityType="Self.Delivery" />
+          <EntitySet Name="DeliveryRegistrations" EntityType="Self.DeliveryRegistration" />
+          <EntitySet Name="DeliveryStates" EntityType="Self.DeliveryState" />
+          <EntitySet Name="DetailedStates" EntityType="Self.DetailedState" />
+          <EntitySet Name="Emails" EntityType="Self.Email" />
+          <EntitySet Name="faultCodes" EntityType="Self.faultCode" />
+          <EntitySet Name="payentStates" EntityType="Self.payentState" />
+          <EntitySet Name="Payments" EntityType="Self.Payment" />
+          <EntitySet Name="paymentTypes" EntityType="Self.paymentType" />
+          <EntitySet Name="PostalTerminals" EntityType="Self.PostalTerminal" />
+          <EntitySet Name="PostOffices" EntityType="Self.PostOffice" />
+          <EntitySet Name="RegisteredUsers" EntityType="Self.RegisteredUser" />
+          <EntitySet Name="RegisteredUsers_Admin" EntityType="Self.RegisteredUsers_Admin" />
+          <EntitySet Name="RegisteredUsers_Client" EntityType="Self.RegisteredUsers_Client" />
+          <EntitySet Name="RegisteredUsers_Handler" EntityType="Self.RegisteredUsers_Handler" />
+          <EntitySet Name="Tables" EntityType="Self.Table" />
+          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
+          <AssociationSet Name="FK_CarHandler" Association="Self.FK_CarHandler">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="RegisteredUsers_Handler" EntitySet="RegisteredUsers_Handler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CitiesPostalTerminal" Association="Self.FK_CitiesPostalTerminal">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="PostalTerminals" EntitySet="PostalTerminals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CitiesPostOffice" Association="Self.FK_CitiesPostOffice">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="PostOffices" EntitySet="PostOffices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeliveryRegistrationDelivery" Association="Self.FK_DeliveryRegistrationDelivery">
+            <End Role="Deliveries" EntitySet="Deliveries" />
+            <End Role="DeliveryRegistrations" EntitySet="DeliveryRegistrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeliveryStateDelivery" Association="Self.FK_DeliveryStateDelivery">
+            <End Role="Deliveries" EntitySet="Deliveries" />
+            <End Role="DeliveryStates" EntitySet="DeliveryStates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmailDelivery" Association="Self.FK_EmailDelivery">
+            <End Role="Deliveries" EntitySet="Deliveries" />
+            <End Role="Emails" EntitySet="Emails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentDelivery" Association="Self.FK_PaymentDelivery">
+            <End Role="Deliveries" EntitySet="Deliveries" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailedStatefaultCodes" Association="Self.FK_DetailedStatefaultCodes">
+            <End Role="faultCodes" EntitySet="faultCodes" />
+            <End Role="DetailedStates" EntitySet="DetailedStates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostalTerminalDetailedState" Association="Self.FK_PostalTerminalDetailedState">
+            <End Role="DetailedStates" EntitySet="DetailedStates" />
+            <End Role="PostalTerminals" EntitySet="PostalTerminals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_payentStatePayment" Association="Self.FK_payentStatePayment">
+            <End Role="Payments" EntitySet="Payments" />
+            <End Role="payentStates" EntitySet="payentStates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_paymentTypePayment" Association="Self.FK_paymentTypePayment">
+            <End Role="paymentTypes" EntitySet="paymentTypes" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostOfficeHandler" Association="Self.FK_PostOfficeHandler">
+            <End Role="PostOffices" EntitySet="PostOffices" />
+            <End Role="RegisteredUsers_Handler" EntitySet="RegisteredUsers_Handler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Admin_inherits_RegisteredUser" Association="Self.FK_Admin_inherits_RegisteredUser">
+            <End Role="RegisteredUsers" EntitySet="RegisteredUsers" />
+            <End Role="RegisteredUsers_Admin" EntitySet="RegisteredUsers_Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_inherits_RegisteredUser" Association="Self.FK_Client_inherits_RegisteredUser">
+            <End Role="RegisteredUsers" EntitySet="RegisteredUsers" />
+            <End Role="RegisteredUsers_Client" EntitySet="RegisteredUsers_Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Handler_inherits_RegisteredUser" Association="Self.FK_Handler_inherits_RegisteredUser">
+            <End Role="RegisteredUsers" EntitySet="RegisteredUsers" />
+            <End Role="RegisteredUsers_Handler" EntitySet="RegisteredUsers_Handler" />
+          </AssociationSet>
+          <AssociationSet Name="PostalTerminalHandler" Association="Self.PostalTerminalHandler">
+            <End Role="RegisteredUsers_Handler" EntitySet="RegisteredUsers_Handler" />
+            <End Role="PostalTerminals" EntitySet="PostalTerminals" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="postalterminaldbModelStoreContainer" CdmEntityContainer="postalterminaldbEntities">
+          <EntitySetMapping Name="Cars">
+            <EntityTypeMapping TypeName="postalterminaldbModel.Car">
+              <MappingFragment StoreEntitySet="Cars">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="numberPlate" ColumnName="numberPlate" />
+                <ScalarProperty Name="insurance" ColumnName="insurance" />
+                <ScalarProperty Name="TA" ColumnName="TA" />
+                <ScalarProperty Name="isWorking" ColumnName="isWorking" />
+                <ScalarProperty Name="garage" ColumnName="garage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="postalterminaldbModel.City">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="ISOCode" ColumnName="ISOCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Deliveries">
+            <EntityTypeMapping TypeName="postalterminaldbModel.Delivery">
+              <MappingFragment StoreEntitySet="Deliveries">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="clientID" ColumnName="clientID" />
+                <ScalarProperty Name="paymentID" ColumnName="paymentID" />
+                <ScalarProperty Name="registrationID" ColumnName="registrationID" />
+                <ScalarProperty Name="receiverName" ColumnName="receiverName" />
+                <ScalarProperty Name="receiverSurname" ColumnName="receiverSurname" />
+                <ScalarProperty Name="registrationDate" ColumnName="registrationDate" />
+                <ScalarProperty Name="weight" ColumnName="weight" />
+                <ScalarProperty Name="emailSent" ColumnName="emailSent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeliveryRegistrations">
+            <EntityTypeMapping TypeName="postalterminaldbModel.DeliveryRegistration">
+              <MappingFragment StoreEntitySet="DeliveryRegistrations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="registrationDate" ColumnName="registrationDate" />
+                <ScalarProperty Name="validUntil" ColumnName="validUntil" />
+                <ScalarProperty Name="validFrom" ColumnName="validFrom" />
+                <ScalarProperty Name="Delivery_Id" ColumnName="Delivery_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeliveryStates">
+            <EntityTypeMapping TypeName="postalterminaldbModel.DeliveryState">
+              <MappingFragment StoreEntitySet="DeliveryStates">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="stateID" ColumnName="stateID" />
+                <ScalarProperty Name="updateDate" ColumnName="updateDate" />
+                <ScalarProperty Name="Delivery_Id" ColumnName="Delivery_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetailedStates">
+            <EntityTypeMapping TypeName="postalterminaldbModel.DetailedState">
+              <MappingFragment StoreEntitySet="DetailedStates">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="isWorking" ColumnName="isWorking" />
+                <ScalarProperty Name="faultCode" ColumnName="faultCode" />
+                <ScalarProperty Name="isFull" ColumnName="isFull" />
+                <ScalarProperty Name="needsService" ColumnName="needsService" />
+                <ScalarProperty Name="faultCode1_Id" ColumnName="faultCode1_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Emails">
+            <EntityTypeMapping TypeName="postalterminaldbModel.Email">
+              <MappingFragment StoreEntitySet="Emails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="clientID" ColumnName="clientID" />
+                <ScalarProperty Name="deliveryID" ColumnName="deliveryID" />
+                <ScalarProperty Name="sendTime" ColumnName="sendTime" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="email1" ColumnName="email" />
+                <ScalarProperty Name="Delivery_Id" ColumnName="Delivery_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="faultCodes">
+            <EntityTypeMapping TypeName="postalterminaldbModel.faultCode">
+              <MappingFragment StoreEntitySet="faultCodes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="payentStates">
+            <EntityTypeMapping TypeName="postalterminaldbModel.payentState">
+              <MappingFragment StoreEntitySet="payentStates">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Payment_Id" ColumnName="Payment_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="postalterminaldbModel.Payment">
+              <MappingFragment StoreEntitySet="Payments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="paymentStateID" ColumnName="paymentStateID" />
+                <ScalarProperty Name="paymentTypeID" ColumnName="paymentTypeID" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="paymentTypeId1" ColumnName="paymentTypeId1" />
+                <ScalarProperty Name="Delivery_Id" ColumnName="Delivery_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="paymentTypes">
+            <EntityTypeMapping TypeName="postalterminaldbModel.paymentType">
+              <MappingFragment StoreEntitySet="paymentTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PostalTerminals">
+            <EntityTypeMapping TypeName="postalterminaldbModel.PostalTerminal">
+              <MappingFragment StoreEntitySet="PostalTerminals">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="cityID" ColumnName="cityID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="placesCount" ColumnName="placesCount" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="ZIPCode" ColumnName="ZIPCode" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+                <ScalarProperty Name="workHours" ColumnName="workHours" />
+                <ScalarProperty Name="CitiesId" ColumnName="CitiesId" />
+                <ScalarProperty Name="DetailedState_Id" ColumnName="DetailedState_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PostOffices">
+            <EntityTypeMapping TypeName="postalterminaldbModel.PostOffice">
+              <MappingFragment StoreEntitySet="PostOffices">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="cityID" ColumnName="cityID" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="employees" ColumnName="employees" />
+                <ScalarProperty Name="shipments" ColumnName="shipments" />
+                <ScalarProperty Name="ZIPCode" ColumnName="ZIPCode" />
+                <ScalarProperty Name="CitiesId" ColumnName="CitiesId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegisteredUsers">
+            <EntityTypeMapping TypeName="postalterminaldbModel.RegisteredUser">
+              <MappingFragment StoreEntitySet="RegisteredUsers">
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="registerDate" ColumnName="registerDate" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegisteredUsers_Admin">
+            <EntityTypeMapping TypeName="postalterminaldbModel.RegisteredUsers_Admin">
+              <MappingFragment StoreEntitySet="RegisteredUsers_Admin">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="workTable" ColumnName="workTable" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegisteredUsers_Client">
+            <EntityTypeMapping TypeName="postalterminaldbModel.RegisteredUsers_Client">
+              <MappingFragment StoreEntitySet="RegisteredUsers_Client">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="sendOffers" ColumnName="sendOffers" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegisteredUsers_Handler">
+            <EntityTypeMapping TypeName="postalterminaldbModel.RegisteredUsers_Handler">
+              <MappingFragment StoreEntitySet="RegisteredUsers_Handler">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="car" ColumnName="car" />
+                <ScalarProperty Name="PostOfficeId" ColumnName="PostOfficeId" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="Car_Id" ColumnName="Car_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tables">
+            <EntityTypeMapping TypeName="postalterminaldbModel.Table">
+              <MappingFragment StoreEntitySet="Table">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="database_firewall_rules">
+            <EntityTypeMapping TypeName="postalterminaldbModel.database_firewall_rules">
+              <MappingFragment StoreEntitySet="database_firewall_rules">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="PostalTerminalHandler" TypeName="postalterminaldbModel.PostalTerminalHandler" StoreEntitySet="PostalTerminalHandler">
+            <EndProperty Name="RegisteredUsers_Handler">
+              <ScalarProperty Name="User_id" ColumnName="Handlers_User_id" />
+            </EndProperty>
+            <EndProperty Name="PostalTerminals">
+              <ScalarProperty Name="Id" ColumnName="PostalTerminals_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
